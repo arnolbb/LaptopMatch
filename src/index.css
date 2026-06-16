@@ -1,73 +1,156 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&display=swap');
 @import "tailwindcss";
 
+/* ── Design tokens ────────────────────────────────────────────────────────── */
 :root {
-  --bg-main: #FAFAFA;
-  --card-bg: #FFFFFF;
-  --card-hover: #F3F4F6;
-  --text-main: #111827;
-  --muted: #6B7280;
+  /* Light theme */
+  --bg:        oklch(0.98 0.002 240);
+  --surface:   oklch(0.94 0.004 240);
+  --surface2:  oklch(0.90 0.006 240);
+  --ink:       oklch(0.12 0.012 240);
+  --ink2:      oklch(0.35 0.010 240);
+  --primary:   oklch(0.45 0.17 195);
+  --accent:    oklch(0.60 0.18 195);
+  --muted:     oklch(0.50 0.010 240);
+  --border:    oklch(0.84 0.006 240);
+  --border2:   oklch(0.75 0.008 240);
+  --success:   oklch(0.52 0.16 155);
+  --success-lt: oklch(0.94 0.03 155);
+  --danger:    oklch(0.52 0.19 25);
+  --danger-lt:  oklch(0.94 0.03 25);
+  --accent-lt:  oklch(0.94 0.03 195);
+  
+  --shadow:    none;
+  --shadow-md: none;
 }
 
 .dark {
-  --bg-main: #0A0A0F;
-  --card-bg: #14141E;
-  --card-hover: #1A1A26;
-  --text-main: #F0EEFF;
-  --muted: #8B8AA0;
-}
-
-@theme {
-  --font-display: "Syne", sans-serif;
-  --font-sans: "DM Sans", sans-serif;
-
-  --color-accent: #7C6AF7;
-  --color-accent-hover: #6554D1;
-  --color-bg-main: var(--bg-main);
-  --color-card-bg: var(--card-bg);
-  --color-card-hover: var(--card-hover);
-  --color-text-main: var(--text-main);
-  --color-muted: var(--muted);
+  /* Dark theme (default in App.tsx) - Calibrated for high readability at low screen brightness */
+  --bg:        oklch(0.16 0.004 240);
+  --surface:   oklch(0.20 0.006 240);
+  --surface2:  oklch(0.24 0.008 240);
+  --ink:       oklch(0.97 0.002 240);
+  --ink2:      oklch(0.82 0.006 240);
+  --primary:   oklch(0.72 0.16 195);
+  --accent:    oklch(0.75 0.16 195);
+  --muted:     oklch(0.64 0.008 240);
+  --border:    oklch(0.30 0.008 240);
+  --border2:   oklch(0.36 0.008 240);
+  --success:   oklch(0.70 0.15 155);
+  --success-lt: oklch(0.22 0.03 155);
+  --danger:    oklch(0.70 0.16 25);
+  --danger-lt:  oklch(0.22 0.03 25);
+  --accent-lt:  oklch(0.22 0.04 195);
   
-  --color-success: #10B981;
-  --color-danger: #EF4444;
+  --shadow:    none;
+  --shadow-md: none;
 }
+
+/* ── Tailwind theme ────────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-bg:         var(--bg);
+  --color-surface:    var(--surface);
+  --color-surface2:   var(--surface2);
+  --color-ink:        var(--ink);
+  --color-ink2:       var(--ink2);
+  --color-accent:     var(--accent);
+  --color-accent-lt:  var(--accent-lt);
+  --color-muted:      var(--muted);
+  --color-border:     var(--border);
+  --color-border2:    var(--border2);
+  --color-success:    var(--success);
+  --color-success-lt: var(--success-lt);
+  --color-danger:     var(--danger);
+  --color-danger-lt:  var(--danger-lt);
+
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 2px;
+  --radius-3xl: 2px;
+
+  --shadow-soft: none;
+  --shadow-card: none;
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background-color: var(--color-bg-main);
-  color: var(--color-text-main);
+  background-color: var(--bg);
+  color: var(--ink);
   font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1, h2, h3, h4, h5, h6, .font-display {
-  font-family: var(--font-display);
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
-/* Base custom styles for slider styling to match design */
+/* ── Range slider ──────────────────────────────────────────────────────────── */
 input[type=range] {
-  -webkit-appearance: none; 
-  background: transparent; 
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  width: 100%;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: linear-gradient(to right, var(--accent) var(--slider-pct, 0%), var(--border2) var(--slider-pct, 0%));
 }
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  background: var(--color-text-main);
-  border: 4px solid var(--color-accent);
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(124, 106, 247, 0.5);
+  height: 16px;
+  width: 16px;
+  border-radius: 0px;
+  background: var(--accent);
+  border: 1px solid var(--bg);
+  margin-top: -7px;
+  transition: transform 0.15s ease;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+input[type=range]::-moz-range-track {
+  height: 2px;
+  background: linear-gradient(to right, var(--accent) var(--slider-pct, 0%), var(--border2) var(--slider-pct, 0%));
 }
 input[type=range]::-moz-range-thumb {
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  background: var(--color-text-main);
-  border: 4px solid var(--color-accent);
+  height: 16px;
+  width: 16px;
+  border-radius: 0px;
+  background: var(--accent);
+  border: 1px solid var(--bg);
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(124, 106, 247, 0.5);
 }
-input[type=range]:focus {
-  outline: none; 
+input[type=range]:focus { outline: none; }
+
+/* ── Selection ────────────────────────────────────────────────────────────── */
+::selection {
+  background: oklch(0.72 0.18 195 / 0.2);
+  color: var(--ink);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 0px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* ── Utilities ────────────────────────────────────────────────────────────── */
+.bg-grid {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, var(--border) 1.2px, transparent 1.2px);
 }
