@@ -13,7 +13,8 @@ Dokumen ini memuat detail implementasi, arsitektur, sistem desain, dan fitur-fit
 Aplikasi ini dikembangkan dengan arsitektur modern yang ringan dan cepat:
 - **Frontend**: React 19 (TypeScript) & Vite.
 - **Styling**: Tailwind CSS v4 (menggunakan skema warna OKLCH dan variabel CSS dinamis).
-- **Backend**: Express (TypeScript) terintegrasi sebagai server API mandiri yang menyajikan aset frontend statis pada lingkungan produksi.
+- **Backend (Local)**: Express (TypeScript) terintegrasi sebagai server API mandiri yang menyajikan aset frontend statis pada lingkungan produksi.
+- **Backend (Vercel)**: Vercel Serverless Function menggunakan Node.js runtime (`api/recommend.ts`).
 - **AI Engine**: `@google/genai` SDK terhubung dengan model `gemini-2.5-flash` menggunakan skema JSON terstruktur (*structured output*).
 - **Animasi**: `motion` (Framer Motion v12) untuk transisi halaman yang natural.
 
@@ -52,3 +53,14 @@ Berikut adalah pembaruan fitur utama yang dibangun dalam V2 sesuai spesifikasi P
      - Menyediakan tombol pintasan pencarian pasar lokal terintegrasi untuk Tokopedia (hijau) dan Shopee (oranye).
      - Fitur **Inspektur Hardware Detail**: Akordeon interaktif ("Lihat Detail Spec") yang menampilkan tabel spesifikasi perangkat keras lengkap secara mendalam ketika diklik.
    - Komponen **BuyingAdvicePanel** (`src/components/BuyingAdvicePanel.tsx`): Saran pembelian keseluruhan yang diformat khusus dalam kotak panel informatif.
+
+---
+
+## 5. Konfigurasi Deployment Vercel
+Untuk mendukung penyajian fungsi serverless dan *routing* aplikasi SPA di Vercel:
+1. **Serverless Function** (`api/recommend.ts`):
+   - Merupakan replika logika backend `server.ts` yang disesuaikan untuk berjalan di lingkungan *serverless cloud* Vercel (tanpa mendengarkan *port* 3000 secara manual).
+   - Memproses permintaan POST dari aplikasi frontend, melakukan validasi kriteria, membatasi laju permintaan (*rate limit*), dan melakukan kueri langsung ke Gemini API.
+2. **Vercel Routing** (`vercel.json`):
+   - Mengarahkan semua permintaan `/api/*` secara transparan ke folder `/api/`.
+   - Mengarahkan seluruh lalu lintas rute frontend SPA (`/*`) kembali ke `/index.html` untuk menghindari kesalahan halaman 404 ketika pengguna memuat ulang (*refresh*) halaman pada path sub-direktori.
