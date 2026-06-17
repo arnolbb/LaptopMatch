@@ -31,7 +31,7 @@ export function LaptopResultCard({ rec, badge, label, highlight, matchScore }: L
 
       {/* Card Header */}
       <div className={`
-        px-5 md:px-6 py-3.5 border-b flex items-center justify-between gap-4
+        px-5 md:px-6 py-3.5 border-b flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4
         ${highlight ? "bg-accent-lt border-accent/20" : "bg-surface2/60 border-border"}
       `}>
         <div className="flex items-center gap-2.5 min-w-0">
@@ -44,7 +44,7 @@ export function LaptopResultCard({ rec, badge, label, highlight, matchScore }: L
             ${highlight ? "text-accent" : "text-ink2"}
           `}>{label}</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between sm:justify-end gap-2.5 shrink-0">
           <span className="font-mono text-[0.875rem] font-bold text-accent shrink-0 tabular-nums">
             {rec.price}
           </span>
@@ -111,7 +111,7 @@ export function LaptopResultCard({ rec, badge, label, highlight, matchScore }: L
         <div className="pt-2 flex flex-wrap gap-2.5 border-t border-border">
           <button
             onClick={() => setShowDetail(!showDetail)}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-none border border-border text-[0.6875rem] font-mono font-bold uppercase tracking-wider hover:bg-surface active:scale-[0.98] transition-all cursor-pointer"
+            className="flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 rounded-none border border-border text-[0.6875rem] font-mono font-bold uppercase tracking-wider hover:bg-surface active:scale-[0.98] transition-all cursor-pointer"
           >
             {showDetail ? (
               <>
@@ -128,7 +128,7 @@ export function LaptopResultCard({ rec, badge, label, highlight, matchScore }: L
             href={tokpUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-none border border-[#00B156]/40 hover:border-[#00B156] bg-[#00B156]/5 text-[#00B156] text-[0.6875rem] font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            className="flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 rounded-none border border-[#00B156]/40 hover:border-[#00B156] bg-[#00B156]/5 text-[#00B156] text-[0.6875rem] font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
           >
             <ShoppingBag className="w-3.5 h-3.5" /> Cari di Tokopedia
           </a>
@@ -137,7 +137,7 @@ export function LaptopResultCard({ rec, badge, label, highlight, matchScore }: L
             href={shopeeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-none border border-[#EE4D2D]/40 hover:border-[#EE4D2D] bg-[#EE4D2D]/5 text-[#EE4D2D] text-[0.6875rem] font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            className="flex items-center justify-center gap-1.5 w-full sm:w-auto px-4 py-2.5 rounded-none border border-[#EE4D2D]/40 hover:border-[#EE4D2D] bg-[#EE4D2D]/5 text-[#EE4D2D] text-[0.6875rem] font-mono font-bold uppercase tracking-wider transition-colors cursor-pointer"
           >
             <ShoppingBag className="w-3.5 h-3.5" /> Cari di Shopee
           </a>
