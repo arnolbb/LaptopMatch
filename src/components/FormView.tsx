@@ -285,6 +285,7 @@ export function FormView({ isDarkMode, onToggleDarkMode, onResult, onBack, initi
             {currentStep === 1 && (
               <motion.div
                 key="step1"
+                className="w-full"
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 8 }}
@@ -325,6 +326,7 @@ export function FormView({ isDarkMode, onToggleDarkMode, onResult, onBack, initi
             {currentStep === 2 && (
               <motion.div
                 key="step2"
+                className="w-full"
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 8 }}
@@ -359,6 +361,7 @@ export function FormView({ isDarkMode, onToggleDarkMode, onResult, onBack, initi
             {currentStep === 3 && (
               <motion.div
                 key="step3"
+                className="w-full"
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 8 }}
@@ -382,6 +385,7 @@ export function FormView({ isDarkMode, onToggleDarkMode, onResult, onBack, initi
             {currentStep === 4 && (
               <motion.div
                 key="step4"
+                className="w-full"
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 8 }}
@@ -420,6 +424,7 @@ export function FormView({ isDarkMode, onToggleDarkMode, onResult, onBack, initi
             {currentStep === 5 && (
               <motion.div
                 key="step5"
+                className="w-full"
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 8 }}

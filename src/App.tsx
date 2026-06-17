@@ -144,7 +144,7 @@ export default function App() {
     <div className="min-h-screen bg-bg bg-grid text-ink">
       <AnimatePresence mode="wait">
       {view === "landing" && (
-        <motion.div key="landing" {...pageVariants}>
+        <motion.div key="landing" {...pageVariants} className="w-full">
           <LandingView
             isDarkMode={isDarkMode}
             onToggleDarkMode={toggleDark}
@@ -154,7 +154,7 @@ export default function App() {
         </motion.div>
       )}
       {view === "form" && (
-        <motion.div key="form" {...pageVariants}>
+        <motion.div key="form" {...pageVariants} className="w-full">
           <FormView
             isDarkMode={isDarkMode}
             onToggleDarkMode={toggleDark}
@@ -166,7 +166,7 @@ export default function App() {
         </motion.div>
       )}
       {view === "result" && result && (
-        <motion.div key="result" {...pageVariants}>
+        <motion.div key="result" {...pageVariants} className="w-full">
           <ResultView
             result={result}
             preferences={preferences}
